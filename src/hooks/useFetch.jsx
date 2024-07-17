@@ -6,21 +6,21 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getTodosData = async () => {
+    const getData = async () => {
       setIsLoader(true);
       try {
         const res = await fetch(url);
         if (!res.ok) throw new Error("Todos not found!");
         const data = await res.json();
-        const slicedData = data.slice(0, 30);
-        setData(slicedData);
+        // const slicedData = data.slice(0, 30);
+        setData(data);
       } catch (e) {
         setError(e.message);
       } finally {
         setIsLoader(false);
       }
     };
-    getTodosData();
+    getData();
   }, [url]);
 
   return { data, isLoader, error };
